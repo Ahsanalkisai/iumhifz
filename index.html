@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hifz Muqarraru Dhaskuramaa</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f9f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: #388e3c;
+      margin-bottom: 15px;
+    }
+    .container {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    select, button {
+      width: 250px;
+      padding: 12px 18px;
+      font-size: 16px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background-color: #388e3c;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    select:hover, button:hover {
+      background-color: #66bb6a;
+    }
+    select:focus, button:focus {
+      outline: none;
+    }
+    .page-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .page-buttons button {
+      width: 80px;
+      margin: 5px;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: none;
+      background-color: #2196F3; /* Blue color */
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .page-buttons button:hover {
+      background-color: #1976D2; /* Darker blue on hover */
+    }
+    audio {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hifz Muqarraru Dhaskuramaa</h1>
+    <label for="hifzSelect">Select Hifz Module</label>
+    <select id="hifzSelect">
+      <option value="hifz6">Hifz 6</option>
+      <option value="hifz7">Hifz 7</option>
+      <option value="hifz8">Hifz 8</option>
+      <option value="hifz9">Hifz 9</option>
+      <option value="hifz10">Hifz 10</option>
+      <option value="hifz11">Hifz 11</option>
+    </select>
+
+    <div class="page-buttons" id="pageButtons"></div>
+
+    <audio id="audioPlayer" controls>
+      <source src="" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    const pageLinks = {
+      hifz6: {
+        522: "https://ia801706.us.archive.org/9/items/page-526_202502/Page522.mp3",
+        523: "https://ia801706.us.archive.org/9/items/page-526_202502/Page523.mp3",
+        524: "https://ia801706.us.archive.org/9/items/page-526_202502/Page524.mp3",
+        525: "https://ia801706.us.archive.org/9/items/page-526_202502/Page525.mp3",
+        526: "https://ia801706.us.archive.org/9/items/page-526_202502/Page526.mp3",
+        527: "https://ia801706.us.archive.org/9/items/page-526_202502/Page527.mp3",
+        528: "https://ia801706.us.archive.org/9/items/page-526_202502/Page528.mp3",
+        529: "https://ia801706.us.archive.org/9/items/page-526_202502/Page529.mp3",
+        530: "https://ia601706.us.archive.org/9/items/page-526_202502/Page530.mp3",
+        531: "https://ia601706.us.archive.org/9/items/page-526_202502/Page531.mp3"
+      },
+      hifz7: {
+        531: "https://ia800609.us.archive.org/30/items/page-533/Page531_Part_B.mp3",
+        532: "https://ia800609.us.archive.org/30/items/page-533/Page532.mp3",
+        533: "https://ia800609.us.archive.org/30/items/page-533/Page533.mp3",
+        534: "https://ia800609.us.archive.org/30/items/page-533/Page534.mp3",
+        535: "https://ia800609.us.archive.org/30/items/page-533/Page535.mp3",
+        536: "https://ia800609.us.archive.org/30/items/page-533/Page536.mp3",
+        537: "https://ia800609.us.archive.org/30/items/page-533/Page537.mp3",
+        538: "https://ia800609.us.archive.org/30/items/page-533/Page538.mp3",
+        539: "https://ia800609.us.archive.org/30/items/page-533/Page539.mp3",
+        540: "https://ia800609.us.archive.org/30/items/page-533/Page540.mp3"
+      },
+      hifz8: {
+        502: "https://ia601704.us.archive.org/10/items/8_20250217/Page502.mp3",
+        503: "https://ia601704.us.archive.org/10/items/8_20250217/Page503.mp3",
+        504: "https://ia601704.us.archive.org/10/items/8_20250217/Page504.mp3",
+        505: "https://ia601704.us.archive.org/10/items/8_20250217/Page505.mp3",
+        506: "https://ia601704.us.archive.org/10/items/8_20250217/Page506.mp3",
+        507: "https://ia601704.us.archive.org/10/items/8_20250217/Page507.mp3",
+        508: "https://ia601704.us.archive.org/10/items/8_20250217/Page508.mp3",
+        509: "https://ia601704.us.archive.org/10/items/8_20250217/Page509.mp3",
+        510: "https://ia601704.us.archive.org/10/items/8_20250217/Page510.mp3",
+        511: "https://ia601704.us.archive.org/10/items/8_20250217/Page511.mp3"
+      },
+      hifz9: {
+        512: "https://ia601403.us.archive.org/8/items/page-519/Page512.mp3",
+        513: "https://ia801403.us.archive.org/8/items/page-519/Page513.mp3",
+        514: "https://ia801403.us.archive.org/8/items/page-519/Page514.mp3",
+        515: "https://ia801403.us.archive.org/8/items/page-519/Page515.mp3",
+        516: "https://ia801403.us.archive.org/8/items/page-519/Page516.mp3",
+        517: "https://ia801403.us.archive.org/8/items/page-519/Page517.mp3",
+        518: "https://ia801403.us.archive.org/8/items/page-519/Page518.mp3",
+        519: "https://ia801403.us.archive.org/8/items/page-519/Page519.mp3",
+        520: "https://ia801403.us.archive.org/8/items/page-519/Page520.mp3",
+        521: "https://ia801403.us.archive.org/8/items/page-519/Page521.mp3"
+      },
+      hifz10: {
+        482: "https://ia800702.us.archive.org/25/items/hifz-10/Page482.mp3",
+        483: "https://ia600702.us.archive.org/25/items/hifz-10/Page483.mp3",
+        484: "https://ia600702.us.archive.org/25/items/hifz-10/Page484.mp3",
+        485: "https://ia600702.us.archive.org/25/items/hifz-10/Page485.mp3",
+        486: "https://ia600702.us.archive.org/25/items/hifz-10/Page486.mp3",
+        487: "https://ia600702.us.archive.org/25/items/hifz-10/Page487.mp3",
+        488: "https://ia600702.us.archive.org/25/items/hifz-10/Page488.mp3",
+        489: "https://ia600702.us.archive.org/25/items/hifz-10/Page489.mp3",
+        490: "https://ia600702.us.archive.org/25/items/hifz-10/Page490.mp3",
+        491: "https://ia600702.us.archive.org/25/items/hifz-10/Page491.mp3"
+      },
+      hifz11: {
+        492: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20492.mp3",
+        493: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20493.mp3",
+        495: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20495.mp3",
+        496: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20496.mp3",
+        497: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20497.mp3",
+        498: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20498.mp3",
+        499: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20499.mp3",
+        500: "https://ia600809.us.archive.org/5/items/hifz-11/Page%20500.mp3",
+        501: "https://ia800809.us.archive.org/5/items/hifz-11/Page%20501.mp3",
+        502: "https://ia800809.us.archive.org/5/items/hifz-11/Page502.mp3"
+      }
+    };
+
+    const hifzSelect = document.getElementById('hifzSelect');
+    const pageButtonsContainer = document.getElementById('pageButtons');
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    hifzSelect.addEventListener('change', updatePageButtons);
+
+    function updatePageButtons() {
+      const selectedHifz = hifzSelect.value;
+      pageButtonsContainer.innerHTML = ''; // Clear the previous buttons
+
+      const pages = pageLinks[selectedHifz];
+      for (const page in pages) {
+        const button = document.createElement('button');
+        button.textContent = `Page ${page}`;
+        button.onclick = () => playAudio(pages[page]);
+        pageButtonsContainer.appendChild(button);
+      }
+    }
+
+    function playAudio(audioUrl) {
+      audioPlayer.src = audioUrl;
+      audioPlayer.play();
+    }
+
+    updatePageButtons(); // Initialize on page load
+  </script>
+</body>
+</html>
